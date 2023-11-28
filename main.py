@@ -1,14 +1,62 @@
 from tkinter import *
 from tkinter import messagebox
 import tkinter as tk
+import time
+from random import randint
+from random import *
+
+fraqueza = 5
 
 root = Tk()
 #criacao menu
 menu= Menu(root)
 root.config(menu=menu)
 root.title("Menu InovaAcess - GS HapVida")
-root.geometry("800x800")
+root.geometry("600x600")
 root.resizable(False, False)
+
+
+def abrirSistema():
+    
+    #criacao de nova tela
+    root2 = Tk()
+    root2.title("Menu InovaAcess - GS HapVida")
+    root2.geometry("500x500")
+    btn2 = Button(root2, text = 'Conectar SmartWatch', bd = '5', 
+                          command = lambda: criarFraqueza())
+    btn2.place(relx=0.5, rely=0.5, anchor=CENTER)   
+    btn2.configure(height=10, width=20, bg="gray") 
+    root.destroy() # fecha a tela principal
+
+def alertarFamiliares():
+    return None
+
+def criarFraqueza():
+    while True:
+      time.sleep(1) # só executa depois de 2 segundos
+      if(fraqueza <= 0):
+          if(fraqueza2 <= 8):
+            print("fraqueza está baixa primeiro if")
+            break
+            print("nao executo mais")
+            #ativar o metodo alertarHospital, alertarFamiliares, ligarEmergencia
+      else:
+        #gera um novo numero para fraqueza
+        fraqueza2 = randint(0,100)
+        print(fraqueza2)
+        if(fraqueza2 <= 8):
+            print("fraqueza está baixa ", fraqueza2)
+            break
+        time.sleep(1)
+
+
+#criando o botao
+btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz o evento de clicar e não executar na hora
+                          command = lambda: criarFraqueza())
+#deixa botão centralizado  
+btn.place(relx=0.5, rely=0.5, anchor=CENTER)   
+btn.configure(height=10, width=20, bg="green") 
+
 
 
 
