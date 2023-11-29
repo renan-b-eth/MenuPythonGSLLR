@@ -9,10 +9,14 @@ import matplotlib.pyplot as plt
 #from playsound import playsound tentei mas está dando bug
 from datetime import datetime
 import os
+from geopy.geocoders import Nominatim
+
+
 
 fraqueza = 5
 fraqueza2 = 5
 tamanhoLista = 0
+enderecoCompleto = None
 
 os.system('cls')
 
@@ -58,14 +62,13 @@ def alertarFamiliares():
     return messagebox.showinfo(' AVISAR OS FAMILIARES!! ', \
             'Todos os seus familiares cadastrados no sistema foi avisado com sucesso!')
 
-def alertarHospital():
-    dataAtual = datetime.now()
-    return messagebox.showinfo(' HOSPITAL AVISADO!! ', \
-            f'O hospital onde está cadastrado já foi avisado no horario: {dataAtual} e sua localização foi enviada com sucesso!')
 
 def ligarEmergencia(numero):
     return messagebox.showinfo(' LIGANDO PARA O NUMERO!! ', \
             'Estamos ligando para o numero: ' + numero +  ' para acionar a emergencia!!')
+
+#Pega sua localização
+
 
 def criarFraqueza():
     messagebox.showinfo(' SmarthWatch ', \
@@ -73,7 +76,7 @@ def criarFraqueza():
     #criacao da lista
     listaValores = []
     while True:
-      time.sleep(1) # só executa depois de 2 segundos
+      time.sleep(0.5) # só executa depois de 2 segundos
       if(fraqueza <= 0):
           if(fraqueza2 <= 20):
             print("fraqueza está baixa primeiro if")
@@ -98,14 +101,19 @@ def criarFraqueza():
             
             tamanhoLista = len(listaValores) # pega o tamanho da lista
             #print(f'tamanho da lista {len(listaValores)}') 
+            # pega a sua localização
+            geo = Nominatim(user_agent="geo")
+            loc = geo.geocode("Avenida Paulista 1700")
+            enderecoCompleto = loc.address , " Latitude: " , loc.latitude , " logintude" ,  loc.longitude 
+            #print(enderecoCompleto)
             ligarEmergencia("192") # vai chamar o metodo ligarEmergencia
             alertarFamiliares()
-            alertarHospital()
+            alertarHospital(enderecoCompleto)
             messagebox.showinfo(' RELATÓRIO!! ', \
             f'Esse é o seu relatório de variações de fraqueza: {listaValores}')
             criarGrafico(listaValores, len(listaValores)) #cria o gráfico
             break
-        time.sleep(1)
+        time.sleep(0.5)
 
 #criando o botao
 btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz o evento de clicar e não executar na hora
@@ -113,6 +121,12 @@ btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz 
 #deixa botão centralizado  
 btn.place(relx=0.5, rely=0.5, anchor=CENTER)   
 btn.configure(height=10, width=20, bg="green") 
+
+
+def alertarHospital(endereco):
+    dataAtual = datetime.now()
+    return messagebox.showinfo(' HOSPITAL AVISADO!! ', \
+            f'O hospital onde está cadastrado já foi avisado no horario: {dataAtual} e sua localização: {endereco} foi enviada com sucesso!')
 
 
 #criar o gráfico

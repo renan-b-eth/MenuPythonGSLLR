@@ -11,6 +11,10 @@ Menu Python - Mostrando as funcionalidades do sistema da GS.
 
   É necessário a instalação do geoPy:
 
-  * pip install geopy
+  * pip install geopy==1.11.0
+
+  E a biblioteca playsound para o uso de som no sistema
+
+  * pip install playsound==1.2.2
 
   Link do vídeo do sistema funcionando: https://youtube.com/2231y321937219
