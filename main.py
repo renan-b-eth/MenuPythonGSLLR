@@ -5,9 +5,16 @@ import time
 from random import randint
 from random import *
 from tkinter import ttk
+import matplotlib.pyplot as plt
+#from playsound import playsound tentei mas está dando bug
+from datetime import datetime
+import os
 
 fraqueza = 5
 fraqueza2 = 5
+tamanhoLista = 0
+
+os.system('cls')
 
 root = Tk()
 #criacao menu
@@ -52,8 +59,9 @@ def alertarFamiliares():
             'Todos os seus familiares cadastrados no sistema foi avisado com sucesso!')
 
 def alertarHospital():
+    dataAtual = datetime.now()
     return messagebox.showinfo(' HOSPITAL AVISADO!! ', \
-            'O hospital onde está cadastrado já foi avisado e sua localização foi enviada com sucesso!')
+            f'O hospital onde está cadastrado já foi avisado no horario: {dataAtual} e sua localização foi enviada com sucesso!')
 
 def ligarEmergencia(numero):
     return messagebox.showinfo(' LIGANDO PARA O NUMERO!! ', \
@@ -76,17 +84,26 @@ def criarFraqueza():
         fraqueza2 = randint(0,100)
         listaValores.append(fraqueza2) ## adiciona na lista os valores
         print(fraqueza2)
+        #toca o bip1 do coração
+        #playsound('bipc1.mp3')
         variavelMuda.set(fraqueza2)
         #nao consegui atualizar na label
         atualizar_barra(fraqueza2)
+        #toca o bip2 do coração
+        #playsound("bipc1.mp3")
         #messagebox.showinfo(' SUA FRAQUEZA É ', \
            # f'Sua fraqueza é: {fraqueza2} ')
-        if(fraqueza2 <= 20):   
-            ligarEmergencia("193") # vai chamar o metodo ligarEmergencia
+        if(fraqueza2 <= 20):
+             #toca o alerta do coração
+            
+            tamanhoLista = len(listaValores) # pega o tamanho da lista
+            #print(f'tamanho da lista {len(listaValores)}') 
+            ligarEmergencia("192") # vai chamar o metodo ligarEmergencia
             alertarFamiliares()
             alertarHospital()
-            return messagebox.showinfo(' RELATÓRIO!! ', \
+            messagebox.showinfo(' RELATÓRIO!! ', \
             f'Esse é o seu relatório de variações de fraqueza: {listaValores}')
+            criarGrafico(listaValores, len(listaValores)) #cria o gráfico
             break
         time.sleep(1)
 
@@ -96,6 +113,20 @@ btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz 
 #deixa botão centralizado  
 btn.place(relx=0.5, rely=0.5, anchor=CENTER)   
 btn.configure(height=10, width=20, bg="green") 
+
+
+#criar o gráfico
+
+def criarGrafico(listaValor, tamanhoLista):
+    eixoY = []
+    eixoX = listaValor
+    i=10
+    for i in range(tamanhoLista):
+        #adiciona na lista o tamanho de numeros de x
+        eixoY.append(i)
+        i = i + 10
+    plt.plot(eixoX, eixoY)
+    return plt.show()
 
 
 def pfuncionalidade():
