@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 #from playsound import playsound tentei mas está dando bug
 from datetime import datetime
 import os
+import webbrowser
 from geopy.geocoders import Nominatim
 
 
@@ -37,6 +38,9 @@ label = Label(root2, text = f"SUA FRAQUEZA É: 100", textvariable= variavelMuda)
 #criacao da barra de progresso
 progress_bar = ttk.Progressbar(root2, length=300, mode="determinate", orient="horizontal")
 progress_bar.grid(row=5, column=0, sticky=E, padx=0.5, pady=0.5)
+
+def abrirSite(url):
+    return webbrowser.open(url)
 
 def atualizar_barra(valor):
     progress_bar["value"] = valor
@@ -78,7 +82,7 @@ def criarFraqueza():
     while True:
       time.sleep(0.5) # só executa depois de 2 segundos
       if(fraqueza <= 0):
-          if(fraqueza2 <= 20):
+          if(fraqueza2 <= 10):
             print("fraqueza está baixa primeiro if")
             break
             #ativar o metodo alertarHospital, alertarFamiliares, ligarEmergencia
@@ -96,19 +100,26 @@ def criarFraqueza():
         #playsound("bipc1.mp3")
         #messagebox.showinfo(' SUA FRAQUEZA É ', \
            # f'Sua fraqueza é: {fraqueza2} ')
-        if(fraqueza2 <= 20):
+        if(fraqueza2 <= 10):
              #toca o alerta do coração
             
             tamanhoLista = len(listaValores) # pega o tamanho da lista
             #print(f'tamanho da lista {len(listaValores)}') 
-            # pega a sua localização
+            # pega a sua localização em tempo real
             geo = Nominatim(user_agent="geo")
-            loc = geo.geocode("Avenida Paulista 1700")
+            loc = geo.geocode("avenida paulista 1700")
             enderecoCompleto = loc.address , " Latitude: " , loc.latitude , " logintude" ,  loc.longitude 
             #print(enderecoCompleto)
             ligarEmergencia("192") # vai chamar o metodo ligarEmergencia
+            abrirSite("www.samues.com.br") #abre o site
             alertarFamiliares()
+            #tentar colocar ligação para avisar familiares
             alertarHospital(enderecoCompleto)
+            linkGoogle = "www.google.com.br/maps/@" + str(loc.latitude) + "," + str(loc.longitude) +",15z?entry=ttu"
+            abrirSite(linkGoogle) # abre o mapa do google com sua localização
+            time.sleep(5)
+            abrirSite("https://www2.gndi.com.br/pt/hospitalrosario")
+            #www.google.com.br/maps/@-23.5601864,-46.6423727,15z?entry=ttu
             messagebox.showinfo(' RELATÓRIO!! ', \
             f'Esse é o seu relatório de variações de fraqueza: {listaValores}')
             criarGrafico(listaValores, len(listaValores)) #cria o gráfico
