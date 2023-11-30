@@ -20,5 +20,11 @@ Menu Python - Mostrando as funcionalidades do sistema da GS.
   E a biblioteca playsound para o uso de som no sistema
 
   * pip install playsound==1.2.2
+ 
+     A biblioteca matplotlib já vem no padrão no python, mas instale também, caso der erro no programa é a versão.
+    
+  * pip install matplotlib
+
+  * pip install playsound==1.2.2
 
   Link do vídeo do sistema funcionando: https://youtube.com/2231y321937219
