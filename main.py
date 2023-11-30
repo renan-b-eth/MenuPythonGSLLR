@@ -40,21 +40,21 @@ root2.withdraw() # deixa a tela ocultada
 
 
 etLogin = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
-etLogin.place(x=130, y=50)
+etLogin.place(x=200, y=50)
 lblLogin = Label(font=('Arial', '11', 'bold'), fg='black', text='Login:')
-lblLogin.place(x=10, y=50)
+lblLogin.place(x=180, y=50)
 
 
 etSenha = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
-etSenha.place(x=130, y=100)
+etSenha.place(x=200, y=100)
 lblSenha = Label(font=('Arial', '11', 'bold'), fg='black', text='Senha:')
-lblSenha.place(x=10, y=100)
+lblSenha.place(x=180, y=100)
 
 
 btnLogin = Button(root, text = 'login', bd = '5',
                        command = lambda: validarLogin(etLogin.get(),etSenha.get()))                  
-btnLogin.place(x=230, y=150, anchor=CENTER)
-btnLogin.configure(height=5, width=10, bg="gray")
+btnLogin.place(x=310, y=150, anchor=CENTER)
+btnLogin.configure(height=2, width=5, bg="#CDAA64")
 
 
 def criarMensagem(titulo, mensagem):
