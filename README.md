@@ -25,6 +25,5 @@ Menu Python - Mostrando as funcionalidades do sistema da GS.
     
   * pip install matplotlib
 
-  * pip install playsound==1.2.2
 
   Link do vídeo do sistema funcionando: https://youtube.com/2231y321937219
