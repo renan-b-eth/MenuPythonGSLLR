@@ -27,7 +27,7 @@ root = Tk()
 menu= Menu(root)
 root.config(menu=menu)
 root.title("Menu InovaAcess - GS HapVida")
-root.geometry("600x600")
+root.geometry("600x210")
 root.resizable(False, False)
 
 
@@ -35,7 +35,7 @@ root2 = Tk()
 root2.title("Menu InovaAcess - GS HapVida")
 root2.geometry("500x500")
 variavelMuda = tk.DoubleVar()
-label = Label(root2, text = f"ESTAMOS MONITORANDO SUA FREQUENCIA CARDIACA", textvariable= variavelMuda).place(x = 40,y = 100)  
+label = Label(root2, text = f"ESTAMOS MONITORANDO SUA FREQUÊNCIA CARDIACA", textvariable= variavelMuda).place(x = 100,y = 100)  
 root2.withdraw() # deixa a tela ocultada
 
 
@@ -68,11 +68,11 @@ def validarLogin(login, senha):
     if login == loginPadrao and senha == senhaPadrao:
         criarMensagem("LOGIN OK", "LOGIN FEITO COM SUCESSO")
         #criando o botao
-        btn = Button(root, text = 'ABRIR SISTEMA', bd = '5', font=('Arial', '11', 'bold'), #essse lambda é o que faz o evento de clicar e não executar na hora
+        btn = Button(root, text = 'ABRIR SISTEMA', bd = '5', font=('Arial', '8', 'bold'), #essse lambda é o que faz o evento de clicar e não executar na hora
                           command = lambda: abrirSistema())
         #deixa botão centralizado  
-        btn.place(x=220, y=200)  
-        btn.configure(height=10, width=20, bg="green")
+        btn.place(x=260, y=130)  
+        btn.configure(height=3, width=12, bg="green")
     else:
         criarMensagem("LOGIN ERRADO", "TENTE NOVAMENTE, SENHA OU LOGIN ERRADO")
 
@@ -80,6 +80,7 @@ def validarLogin(login, senha):
 #criacao da barra de progresso
 progress_bar = ttk.Progressbar(root2, length=300, mode="determinate", orient="horizontal")
 progress_bar.grid(row=5, column=0, sticky=E, padx=0.5, pady=0.5)
+progress_bar.place(x=100,y=400)
 
 
 def abrirSite(url):
@@ -95,7 +96,7 @@ def abrirSistema():
    
     #criacao de nova tela
    
-    btn2 = Button(root2, text = 'Conectar SmartWatch', bd = '5',
+    btn2 = Button(root2, text = 'Conectar SmartWatch', bd = '5', font=('Arial', '11', 'bold'), 
                           command = lambda: criarFraqueza())                  
     btn2.place(relx=0.5, rely=0.5, anchor=CENTER)
     btn2.configure(height=10, width=20, bg="gray")
