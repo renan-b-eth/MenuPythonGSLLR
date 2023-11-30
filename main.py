@@ -34,6 +34,8 @@ root2.title("Menu InovaAcess - GS HapVida")
 root2.geometry("500x500")
 variavelMuda = tk.DoubleVar()
 label = Label(root2, text = f"SUA FRAQUEZA É: 100", textvariable= variavelMuda).place(x = 40,y = 100)  
+root2.withdraw() # deixa a tela ocultada
+
 
 #criacao da barra de progresso
 progress_bar = ttk.Progressbar(root2, length=300, mode="determinate", orient="horizontal")
@@ -55,6 +57,7 @@ def abrirSistema():
     btn2.place(relx=0.5, rely=0.5, anchor=CENTER)
     btn2.configure(height=10, width=20, bg="gray")
     root.destroy() # fecha a tela principal
+    root2.deiconify() # aparece a tela
 
 def trocarLabel(numero):
     numero2 = StringVar()
@@ -82,7 +85,7 @@ def criarFraqueza():
     while True:
       time.sleep(0.5) # só executa depois de 2 segundos
       if(fraqueza <= 0):
-          if(fraqueza2 <= 10):
+          if(fraqueza2 <= 5):
             print("fraqueza está baixa primeiro if")
             break
             #ativar o metodo alertarHospital, alertarFamiliares, ligarEmergencia
@@ -100,7 +103,7 @@ def criarFraqueza():
         #playsound("bipc1.mp3")
         #messagebox.showinfo(' SUA FRAQUEZA É ', \
            # f'Sua fraqueza é: {fraqueza2} ')
-        if(fraqueza2 <= 10):
+        if(fraqueza2 <= 5):
              #toca o alerta do coração
             
             tamanhoLista = len(listaValores) # pega o tamanho da lista
@@ -112,6 +115,7 @@ def criarFraqueza():
             #print(enderecoCompleto)
             ligarEmergencia("192") # vai chamar o metodo ligarEmergencia
             abrirSite("www.samues.com.br") #abre o site
+            time.sleep(2)
             alertarFamiliares()
             #tentar colocar ligação para avisar familiares
             alertarHospital(enderecoCompleto)
