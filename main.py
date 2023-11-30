@@ -40,21 +40,21 @@ root2.withdraw() # deixa a tela ocultada
 
 
 etLogin = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
-etLogin.place(x=200, y=50)
+etLogin.place(x=230, y=50)
 lblLogin = Label(font=('Arial', '11', 'bold'), fg='black', text='Login:')
 lblLogin.place(x=180, y=50)
 
 
 etSenha = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
-etSenha.place(x=200, y=100)
+etSenha.place(x=230, y=100)
 lblSenha = Label(font=('Arial', '11', 'bold'), fg='black', text='Senha:')
 lblSenha.place(x=180, y=100)
 
 
-btnLogin = Button(root, text = 'login', bd = '5',
+btnLogin = Button(root, text = 'Login', bd = '5',
                        command = lambda: validarLogin(etLogin.get(),etSenha.get()))                  
-btnLogin.place(x=310, y=150, anchor=CENTER)
-btnLogin.configure(height=2, width=5, bg="#CDAA64")
+btnLogin.place(x=310, y=148, anchor=CENTER)
+btnLogin.configure(height=1, width=5, bg="#CDAA64")
 
 
 def criarMensagem(titulo, mensagem):
@@ -68,10 +68,10 @@ def validarLogin(login, senha):
     if login == loginPadrao and senha == senhaPadrao:
         criarMensagem("LOGIN OK", "LOGIN FEITO COM SUCESSO")
         #criando o botao
-        btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz o evento de clicar e não executar na hora
+        btn = Button(root, text = 'ABRIR SISTEMA', bd = '5', font=('Arial', '11', 'bold'), #essse lambda é o que faz o evento de clicar e não executar na hora
                           command = lambda: abrirSistema())
         #deixa botão centralizado  
-        btn.place(relx=0.5, rely=0.5, anchor=CENTER)  
+        btn.place(x=220, y=200)  
         btn.configure(height=10, width=20, bg="green")
     else:
         criarMensagem("LOGIN ERRADO", "TENTE NOVAMENTE, SENHA OU LOGIN ERRADO")
