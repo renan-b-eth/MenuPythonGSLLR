@@ -1,5 +1,7 @@
 # MenuPythonGSLLR
 Menu Python - Mostrando as funcionalidades do sistema da GS.
+ * Rodar o código na maquina da fiap por conta do versionamento do python e instalação das bilbiotecas geopy
+
 
 # Login Padrão Sistema:
   login: admin
@@ -24,6 +26,8 @@ Menu Python - Mostrando as funcionalidades do sistema da GS.
      A biblioteca matplotlib já vem no padrão no python, mas instale também, caso der erro no programa é a versão.
     
   * pip install matplotlib
+
+
 
 
   Link do vídeo do sistema funcionando: https://youtube.com/2231y321937219
