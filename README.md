@@ -1,11 +1,15 @@
 # MenuPythonGSLLR
 Menu Python - Mostrando as funcionalidades do sistema da GS.
 
+# Login Padrão Sistema:
+  login: admin
+  senha: admin
+
 # Integrantes
 
-* Renan Bezerra
-* Lucas Alcantara
-* Larissa Kawaguite
+* Larissa Kawaguti Feliciano - 553356
+* Lucas Alcântara Carvalho - 95111
+* Renan Bezerra dos Santos - 553228
 
 * Fizemos um sistema de monitoramento de fraqueza de um individuo que está com um smartwatch conectado no sistema, se a sua fraqueza estiver baixa, irá avisar os familiares, hospital e chamar a emergencia para o local pegando sua localidade atual.
 
