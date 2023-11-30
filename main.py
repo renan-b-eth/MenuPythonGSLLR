@@ -13,13 +13,14 @@ import webbrowser
 from geopy.geocoders import Nominatim
 
 
-
 fraqueza = 5
 fraqueza2 = 5
 tamanhoLista = 0
 enderecoCompleto = None
 
+
 os.system('cls')
+
 
 root = Tk()
 #criacao menu
@@ -29,35 +30,78 @@ root.title("Menu InovaAcess - GS HapVida")
 root.geometry("600x600")
 root.resizable(False, False)
 
+
 root2 = Tk()
 root2.title("Menu InovaAcess - GS HapVida")
 root2.geometry("500x500")
 variavelMuda = tk.DoubleVar()
-label = Label(root2, text = f"SUA FRAQUEZA É: 100", textvariable= variavelMuda).place(x = 40,y = 100)  
+label = Label(root2, text = f"ESTAMOS MONITORANDO SUA FREQUENCIA CARDIACA", textvariable= variavelMuda).place(x = 40,y = 100)  
 root2.withdraw() # deixa a tela ocultada
+
+
+etLogin = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
+etLogin.place(x=130, y=50)
+lblLogin = Label(font=('Arial', '11', 'bold'), fg='black', text='Login:')
+lblLogin.place(x=10, y=50)
+
+
+etSenha = Entry(width=25, bg='white', font=('Comic Sans MS', '10'))
+etSenha.place(x=130, y=100)
+lblSenha = Label(font=('Arial', '11', 'bold'), fg='black', text='Senha:')
+lblSenha.place(x=10, y=100)
+
+
+btnLogin = Button(root, text = 'login', bd = '5',
+                       command = lambda: validarLogin(etLogin.get(),etSenha.get()))                  
+btnLogin.place(x=230, y=150, anchor=CENTER)
+btnLogin.configure(height=5, width=10, bg="gray")
+
+
+def criarMensagem(titulo, mensagem):
+    return messagebox.showinfo(titulo, mensagem)
+
+
+#metodo validar login
+def validarLogin(login, senha):
+    loginPadrao = "admin"
+    senhaPadrao = "admin"
+    if login == loginPadrao and senha == senhaPadrao:
+        criarMensagem("LOGIN OK", "LOGIN FEITO COM SUCESSO")
+        #criando o botao
+        btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz o evento de clicar e não executar na hora
+                          command = lambda: abrirSistema())
+        #deixa botão centralizado  
+        btn.place(relx=0.5, rely=0.5, anchor=CENTER)  
+        btn.configure(height=10, width=20, bg="green")
+    else:
+        criarMensagem("LOGIN ERRADO", "TENTE NOVAMENTE, SENHA OU LOGIN ERRADO")
 
 
 #criacao da barra de progresso
 progress_bar = ttk.Progressbar(root2, length=300, mode="determinate", orient="horizontal")
 progress_bar.grid(row=5, column=0, sticky=E, padx=0.5, pady=0.5)
 
+
 def abrirSite(url):
     return webbrowser.open(url)
+
 
 def atualizar_barra(valor):
     progress_bar["value"] = valor
     root2.update()
 
+
 def abrirSistema():
-    
+   
     #criacao de nova tela
-    
-    btn2 = Button(root2, text = 'Conectar SmartWatch', bd = '5', 
-                          command = lambda: criarFraqueza())                   
+   
+    btn2 = Button(root2, text = 'Conectar SmartWatch', bd = '5',
+                          command = lambda: criarFraqueza())                  
     btn2.place(relx=0.5, rely=0.5, anchor=CENTER)
     btn2.configure(height=10, width=20, bg="gray")
     root.destroy() # fecha a tela principal
     root2.deiconify() # aparece a tela
+
 
 def trocarLabel(numero):
     numero2 = StringVar()
@@ -73,6 +117,7 @@ def alertarFamiliares():
 def ligarEmergencia(numero):
     return messagebox.showinfo(' LIGANDO PARA O NUMERO!! ', \
             'Estamos ligando para o numero: ' + numero +  ' para acionar a emergencia!!')
+
 
 #Pega sua localização
 
@@ -105,13 +150,13 @@ def criarFraqueza():
            # f'Sua fraqueza é: {fraqueza2} ')
         if(fraqueza2 <= 5):
              #toca o alerta do coração
-            
+           
             tamanhoLista = len(listaValores) # pega o tamanho da lista
-            #print(f'tamanho da lista {len(listaValores)}') 
+            #print(f'tamanho da lista {len(listaValores)}')
             # pega a sua localização em tempo real
             geo = Nominatim(user_agent="geo")
-            loc = geo.geocode("avenida paulista 1700")
-            enderecoCompleto = loc.address , " Latitude: " , loc.latitude , " logintude" ,  loc.longitude 
+            loc = geo.geocode("rua dos nordestinos 12")
+            enderecoCompleto = loc.address , " Latitude: " , loc.latitude , " logintude" ,  loc.longitude
             #print(enderecoCompleto)
             ligarEmergencia("192") # vai chamar o metodo ligarEmergencia
             abrirSite("www.samues.com.br") #abre o site
@@ -127,15 +172,11 @@ def criarFraqueza():
             messagebox.showinfo(' RELATÓRIO!! ', \
             f'Esse é o seu relatório de variações de fraqueza: {listaValores}')
             criarGrafico(listaValores, len(listaValores)) #cria o gráfico
+            messagebox.showinfo(' RELATÓRIO!! ', \
+            f'Relatório enviado com sucesso para o servidor do hospital, juntamente com a sua ficha de alergias e ficha médica, aguarde a ambulância!!!')
             break
         time.sleep(0.5)
 
-#criando o botao
-btn = Button(root, text = 'Abrir Sistema', bd = '5', #essse lambda é o que faz o evento de clicar e não executar na hora
-                          command = lambda: abrirSistema())
-#deixa botão centralizado  
-btn.place(relx=0.5, rely=0.5, anchor=CENTER)   
-btn.configure(height=10, width=20, bg="green") 
 
 
 def alertarHospital(endereco):
@@ -145,6 +186,7 @@ def alertarHospital(endereco):
 
 
 #criar o gráfico
+
 
 def criarGrafico(listaValor, tamanhoLista):
     eixoY = []
@@ -163,21 +205,25 @@ def pfuncionalidade():
     mylabel = tk.Label(root, textvariable=var)
     mylabel.pack()
 
+
     messagebox.showinfo('Marcação de Consultas Simplificadas', \
       'Portal de Agendamento Intuitivo: Navegação amigável nos portais Hapvida e Notredame. Eficiência na Marcação: Processo simplificado para agendar consultas médicas com rapidez.')
-    
+   
 def sfuncionalidade():
     var = tk.StringVar()
     mylabel = tk.Label(root, textvariable=var)
     mylabel.pack()
 
+
     messagebox.showinfo('Telemedicina Acessível ', \
       'Consultas Virtuais a Qualquer Hora: Acesso 24/7 para consultas remotas. Conexão Prática e Direta: Plataforma facilitaora de interação entre médicos e pacientes.')
+
 
 def tfuncionalidade():
     var = tk.StringVar()
     mylabel = tk.Label(root, textvariable=var)
     mylabel.pack()
+
 
     messagebox.showinfo(' Carteira de Vacinação Digital ', \
       'Acompanhamento Difital das Imunizações: Registro eletrônico para fácil monitoramento. Notificações Automáticas: Alertas para manter as vacinas em dia.')
@@ -188,6 +234,7 @@ def qfuncionalidade():
     mylabel = tk.Label(root, textvariable=var)
     mylabel.pack()
 
+
     messagebox.showinfo(' Lembretes Automáticos ', \
       'Sistema de alertas Personalizado: Lembretes automáticos para consultas, exames e vacinas. Organização Eficiente: Promoção da continuidade do cuidado com lembretes personalizaveis')
 
@@ -195,14 +242,17 @@ def qfuncionalidade():
 def quemSomos():
     messagebox.showinfo("Quem Somos?", "Larissa Kawaguti Feliciano - 553356\nLucas Alcântara Carvalho - 95111\nRenan Bezerra dos Santos - 553228")
 
+
 opcao1 = Menu(menu, tearoff=0)
 opcao1.add_command(label= "1 - Funcionalidade Marcação de Consultas Simplificadas", command=pfuncionalidade)
 opcao1.add_command(label= "2 - Funcionalidade Telemedicina Acessível", command=sfuncionalidade)
 opcao1.add_command(label= "3 - Funcionalidade Carteira de Vacinação Digital", command=tfuncionalidade)
 opcao1.add_command(label= "4 - Funcionalidade  Lembretes Automáticos", command=qfuncionalidade)
 
+
 sobrenos = Menu(menu, tearoff=0)
 sobrenos.add_command(label= "Quem somos", command=quemSomos)
+
 
 sair = Menu(menu, tearoff=0)
 sair.add_command(label="Sair", command=exit)
