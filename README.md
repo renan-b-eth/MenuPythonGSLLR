@@ -29,5 +29,6 @@ Menu Python - Mostrando as funcionalidades do sistema da GS.
 
 
 
+https://youtu.be/GxoEyFF4lbI
 
-  Link do vídeo do sistema funcionando: https://youtube.com/2231y321937219
+  Link do vídeo do sistema funcionando e explicando o codigo.
